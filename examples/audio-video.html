@@ -51,12 +51,14 @@ var player = videojs("myVideo",
 // function upload 
 function PostBlob(audioBlob, videoBlob, fileName) {
         var formData = new FormData();
+        fileNameReady = fileName + "-merged.webm";
         formData.append('filename', fileName);
         formData.append('audio-blob', audioBlob);
         formData.append('video-blob', videoBlob);
         xhr('save.php', formData, function(ffmpeg_output) {
             //document.querySelector('h1').innerHTML = ffmpeg_output.replace(/\\n/g, '<br />');
             //preview.src = 'uploads/' + fileName + '-merged.webm';
+            document.querySelector('#blob').innerHTML = "<a href='uploads/"+fileNameReady+"'>Baixar video</a>";
            // preview.play();
            // preview.muted = false;
         });
@@ -120,6 +122,7 @@ player.on('finishRecord', function()
    fileName = Math.round(Math.random() * 99999999) + 99999999;
    document.querySelector('#blob').innerHTML = 'Carregando video...';
    PostBlob(AudioStream, VideoStream, fileName);
+
 
 
       

@@ -52,7 +52,7 @@
                     $audioFile = 'uploads/'.$_POST["filename"].'.wav';
                     $videoFile = 'uploads/'.$_POST["filename"].'.webm';
                     
-                    $mergedFile = 'uploads/'.$_POST["filename"].'-merged.mp4';
+                    $mergedFile = 'uploads/'.$_POST["filename"].'-merged.webm';
                     
                     // ffmpeg depends on yasm
                     // libvpx depends on libvorbis
@@ -60,10 +60,10 @@
                     // make sure that you're using newest ffmpeg version!
                     
                     if(!strrpos($CurrOS, "Windows")) {
-                        $cmd = '-i '.$audioFile.' -i '.$videoFile.' -map 0:0 -map 1:0 '.$mergedFile;
+                        $cmd = '-i '.$audioFile.' -i '.$videoFile.' -vf "boxblur=15:1" -map 0:0 -map 1:0 '.$mergedFile;
                     }
                     else {
-                        $cmd = ' -i '.$audioFile.' -i '.$videoFile.' -c:v mpeg4 -c:a vorbis -b:v 64k -b:a 12k -strict experimental '.$mergedFile;
+                        $cmd = ' -i '.$audioFile.' -i '.$videoFile.' -vf "boxblur=15:1" -c:v mpeg4 -c:a vorbis -b:v 64k -b:a 12k -strict experimental '.$mergedFile;
                     }
                     
                     exec('ffmpeg '.$cmd.' 2>&1', $out, $ret);

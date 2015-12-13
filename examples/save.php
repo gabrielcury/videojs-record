@@ -52,7 +52,7 @@
                     $audioFile = 'uploads/'.$_POST["filename"].'.wav';
                     $videoFile = 'uploads/'.$_POST["filename"].'.webm';
                     
-                    $mergedFile = 'uploads/'.$_POST["filename"].'-merged.webm';
+                    $mergedFile = 'uploads/'.$_POST["filename"].'-merged.mp4';
                     
                     // ffmpeg depends on yasm
                     // libvpx depends on libvorbis

@@ -29,29 +29,40 @@
 
 <video id="myVideo" class="video-js vjs-default-skin"></video>
 
+<div style="color: #000;"><a id="sem_filtro" href="#">Sem filtro</a> || <a id="blur_moderado" href="#">Borrado moderado</a> || <a id="blur_exagerado" href="#">Anonimo</a></div>
+
 <div id="blob"></div>
 <div id="blobRetorno"></div>
 
 <script>
+
 var player = videojs("myVideo",
 {
     controls: true,
     width: 640,
     height: 480,
-    plugins: {
+        plugins: {
         record: {
             audio: true,
             video: true,
-            maxLength: 240
+            maxLength: 320
         }
     }
 });
 
-
+/*
+player.addChild('BigPlayButton');
+var myButton = player.addChild('button', {
+            text: "Press me",
+            // other options
+          });
+*/
 // function upload 
-function PostBlob(audioBlob, videoBlob, fileName) {
+function PostBlob(audioBlob, videoBlob, fileName, filtro) {
         var formData = new FormData();
+        var filtroBlur = filtro;
         fileNameReady = fileName + "-merged.webm";
+        formData.append('filtro', filtroBlur);
         formData.append('filename', fileName);
         formData.append('audio-blob', audioBlob);
         formData.append('video-blob', videoBlob);
@@ -129,7 +140,6 @@ player.on('finishRecord', function()
 });
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 </body>
 </html>
